@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
- import Icon from "../icon";
+
+import Icon from "../icon";
 import Arrow from "../arrow";
 import Action from "../action";
- class LibraryCourse extends Component {
-   constructor(props) {
+
+class LibraryCourse extends Component {
+
+  constructor(props) {
     super(props)
-     this.state = {
+
+    this.state = {
       status: true
     }
   }
-   renderDescription = function() {
+
+  renderDescription = function() {
     if (!this.state.status) {
       return (
         <div className="library-course__description">
@@ -21,22 +26,34 @@ import Action from "../action";
       )
     }
   }.bind(this);
-   handleCallback = function(status) {
+
+  handleCallback = function(status) {
+    if(!status) {
+      document.getElementById('library-course').classList.add('library-course-selected');
+    } else {
+      document.getElementById('library-course').classList.remove('library-course-selected');
+    }
     this.setState({ status })
   }.bind(this)
 
-
   render() {
     return (
-      <div className="library-course">
+      <div id="library-course" className="library-course">
         <div className="library-course__title-check">
-          <label className="library-course__title">{ this.props.title }</label>
+          <label className="library-course__title">{this.props.title}</label>
           {Icon("fas fa-check", "library-course__icon")}
         </div>
-        <div className="library-course__line"></div>
-        <Arrow callback={status => this.handleCallback(status)} id={this.props.id} className="library-course__arrow" />
-        <Action onClick={() => this.props.toggleEnrolled(this.props.id)} className="library-course__action"/>
-        { this.renderDescription() }
+        <div className="library-course__line" />
+        <Arrow
+          callback={status => this.handleCallback(status)}
+          id={this.props.id}
+          className="library-course__arrow"
+        />
+        <Action
+          onClick={() => this.props.toggleEnrolled(this.props.id)}
+          className="library-course__action"
+        />
+        {this.renderDescription()}
       </div>
     );
   }
