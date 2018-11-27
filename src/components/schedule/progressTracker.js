@@ -10,7 +10,7 @@ return (this.props.amountEnrolled / this.props.amountPossible) * 100;
   render() {
     return (
       <div className="progress-tracker">
-        <label className="progress-tracker__label">Progress Tracker</label>
+        <div className="progress-tracker__title">Progress Tracker</div>
         <div className="progress-tracker__percentage">
           {this.calculateProgress()}%
         </div>
